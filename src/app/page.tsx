@@ -27,7 +27,7 @@ export default function Home() {
                 Learning Lab
               </p>
               <h1 className="mt-4 text-5xl font-black tracking-tight sm:text-6xl md:text-7xl">
-                The Template
+                gened 1145
               </h1>
               <p className="mt-6 max-w-xl text-sm text-white/70 sm:text-base">
                 the Next.js starter to start with in the Learning Lab. Has Tailwind v4, shadcn/ui, and sample components you may want to use for various LL purposes.
@@ -89,6 +89,18 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-neutral-200 bg-neutral-100 px-8 py-8 dark:border-neutral-800 dark:bg-neutral-950">
+        <div className="mx-auto max-w-4xl text-center">
+          <a
+            href="/video-essay/01"
+            className="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
+          >
+            View Video Essay
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }

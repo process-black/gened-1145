@@ -1,31 +1,78 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
+const inferMimeType = (path: string | undefined) => {
+  if (!path) return "video/mp4";
+  if (path.endsWith(".webm")) return "video/webm";
+  if (path.endsWith(".mov")) return "video/quicktime";
+  if (path.endsWith(".mkv")) return "video/x-matroska";
+  if (path.endsWith(".ogv")) return "video/ogg";
+  return "video/mp4";
+};
+
+interface VideoSource {
+  src: string;
+  type?: string;
+}
+
 interface ScrollVideoProps {
   videoSrc: string;
+  sources?: VideoSource[];
   className?: string;
   containerClassName?: string;
   stickyClassName?: string;
+  renderContent?: (args: {
+    video: React.ReactNode;
+    isVideoLoaded: boolean;
+    hadError: boolean;
+  }) => React.ReactNode;
 }
 
 export const ScrollVideo = ({
   videoSrc,
+  sources,
   className = "",
   containerClassName,
   stickyClassName,
+  renderContent,
 }: ScrollVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [hadError, setHadError] = useState(false);
+  const targetTimeRef = useRef(0);
+  const animationFrameRef = useRef<number>();
+  const [isActive, setIsActive] = useState(false);
+
+  const resolvedSources = useMemo(() => {
+    const providedSources =
+      sources?.filter((source): source is VideoSource => Boolean(source?.src)) ?? [];
+    const list =
+      providedSources.length > 0
+        ? providedSources
+        : typeof videoSrc === "string" && videoSrc.length > 0
+          ? [{ src: videoSrc }]
+          : [];
+
+    return list.map((source) => ({
+      src: source.src,
+      type: source.type ?? inferMimeType(source.src),
+    }));
+  }, [videoSrc, sources]);
+
+  const sourcesKey = useMemo(
+    () => resolvedSources.map((source) => `${source.src}:${source.type ?? ""}`).join("|"),
+    [resolvedSources],
+  );
 
   useEffect(() => {
     const video = videoRef.current;
     setIsVideoLoaded(false);
     setHadError(false);
+    targetTimeRef.current = 0;
 
     if (!video) return;
 
@@ -36,7 +83,7 @@ export const ScrollVideo = ({
     if (video.readyState >= 2) {
       setIsVideoLoaded(true);
     }
-  }, [videoSrc]);
+  }, [sourcesKey]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -45,7 +92,7 @@ export const ScrollVideo = ({
     if (!video || !container) return;
 
     const handleScroll = () => {
-      if (!video || !isVideoLoaded) return;
+      if (!video || !isVideoLoaded || !isActive) return;
 
       const containerRect = container.getBoundingClientRect();
       const containerTop = containerRect.top;
@@ -63,7 +110,7 @@ export const ScrollVideo = ({
 
       // Set video time based on scroll progress
       if (video.duration) {
-        video.currentTime = scrollProgress * video.duration;
+        targetTimeRef.current = scrollProgress * video.duration;
       }
     };
 
@@ -79,40 +126,99 @@ export const ScrollVideo = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isVideoLoaded]);
+  }, [isVideoLoaded, isActive]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video || !isActive) return;
+
+    const updateCurrentTime = () => {
+      const targetTime = targetTimeRef.current;
+      const currentTime = video.currentTime;
+
+      if (!Number.isNaN(targetTime)) {
+        const delta = targetTime - currentTime;
+
+        if (Math.abs(delta) > 0.001) {
+          video.currentTime = currentTime + delta * 0.25;
+        }
+      }
+
+      animationFrameRef.current = requestAnimationFrame(updateCurrentTime);
+    };
+
+    animationFrameRef.current = requestAnimationFrame(updateCurrentTime);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = undefined;
+      }
+    };
+  }, [isActive, sourcesKey]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsActive(entry.isIntersecting);
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "0px 0px -20% 0px",
+      },
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const videoNode = (
+    <div className="relative h-full w-full flex items-center justify-center overflow-hidden">
+      <video
+        ref={videoRef}
+        className={cn("h-full w-full object-cover", className)}
+        preload="auto"
+        muted
+        playsInline
+        onLoadedMetadata={() => setIsVideoLoaded(true)}
+        onLoadedData={() => setIsVideoLoaded(true)}
+        onCanPlay={() => setIsVideoLoaded(true)}
+        onError={() => setHadError(true)}
+      >
+        {resolvedSources.map((source) => (
+          <source key={source.src} src={source.src} type={source.type} />
+        ))}
+      </video>
+      {!isVideoLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-background">
+          <div className="text-center">
+            {!hadError ? (
+              <>
+                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent mb-4"></div>
+                <p className="text-muted-foreground">Loading video...</p>
+              </>
+            ) : (
+              <p className="text-muted-foreground">Unable to load video.</p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <div ref={containerRef} className={cn("relative h-[300vh]", containerClassName)}>
-      <div
-        className={cn("sticky top-0 h-screen flex items-center justify-center overflow-hidden", stickyClassName)}
-      >
-        <video
-          ref={videoRef}
-          className={`w-full h-full object-cover ${className}`}
-          preload="auto"
-          muted
-          playsInline
-          onLoadedMetadata={() => setIsVideoLoaded(true)}
-          onLoadedData={() => setIsVideoLoaded(true)}
-          onCanPlay={() => setIsVideoLoaded(true)}
-          onError={() => setHadError(true)}
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-        {!isVideoLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-background">
-            <div className="text-center">
-              {!hadError ? (
-                <>
-                  <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent mb-4"></div>
-                  <p className="text-muted-foreground">Loading video...</p>
-                </>
-              ) : (
-                <p className="text-muted-foreground">Unable to load video.</p>
-              )}
-            </div>
-          </div>
-        )}
+      <div className={cn("sticky top-0 h-screen", stickyClassName)}>
+        {renderContent ? renderContent({ video: videoNode, isVideoLoaded, hadError }) : videoNode}
       </div>
     </div>
   );
