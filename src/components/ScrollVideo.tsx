@@ -44,7 +44,7 @@ export const ScrollVideo = ({
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [hadError, setHadError] = useState(false);
   const targetTimeRef = useRef(0);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const [isActive, setIsActive] = useState(false);
 
   const resolvedSources = useMemo(() => {
