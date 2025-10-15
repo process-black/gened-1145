@@ -229,34 +229,116 @@ const VideoEssayPage = () => {
         </section>
       ))}
 
-      {/* End Section */}
-      <section className="min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-4xl text-center space-y-6">
-          <h2 className="text-4xl md:text-6xl font-bold">
+      {/* Conclusion Section */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-24">
+        <div className="max-w-4xl space-y-12">
+          <h2 className="text-4xl md:text-6xl font-bold text-center">
             <span className="bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-              Further Viewing & Reading
+              Conclusion: Cinema as Memorial
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground">
-            Extend the inquiry beyond this power-station assault with scholarship that ties Godzilla to Cold War urbanism,
-            energy politics, and cultural memory.
-          </p>
-          <div className="grid gap-4 text-sm text-muted-foreground">
-            <p>
-              - Susan Napier, <em>Anime from Akira to Howl&apos;s Moving Castle</em> -- frames Godzilla within Japan&apos;s evolving
-              technology narratives.
+
+          <div className="space-y-6 text-base md:text-lg leading-relaxed">
+            <p className="text-muted-foreground">
+              This close reading of Godzilla&apos;s power-station assault reveals how Ishirō Honda transformed popular monster cinema
+              into a vehicle for processing collective trauma. By interweaving electrical infrastructure, military impotence, and
+              atomic allegory, Honda created a visual language for articulating what postwar Japan could not yet say directly:
+              that modernity&apos;s promises had become modernity&apos;s threats, that reconstruction was built on radioactive ground,
+              and that the nation&apos;s new electrical grid carried currents of both hope and horror.
             </p>
-            <p>
-              - Ian Condry, <em>The Soul of Anime</em> -- explores collaborative production cultures that informed Toho&apos;s
-              visual effects teams.
+
+            <p className="text-muted-foreground">
+              The film&apos;s enduring power lies in its refusal of easy resolution. Unlike American monster films that conclude with
+              military triumph, Godzilla leaves its creature alive, its cities ruined, and its survivors without reassurance.
+              This ambiguity reflects the reality of nuclear fear—a condition that cannot be defeated, only endured. Honda
+              understands that trauma operates in recursive time, constantly returning, reshaping memory into myth and myth
+              into warning.
             </p>
-            <p>
-              - Kyoko Hirano, <em>Mr. Smith Goes to Tokyo</em> -- documents US occupation censorship and the postwar media
-              environment that shaped Honda&apos;s choices.
+
+            <p className="text-muted-foreground">
+              Placing Godzilla within broader Cold War cinema reveals important contrasts. While American science fiction of the
+              1950s—from <em>Them!</em> to <em>The Day the Earth Stood Still</em>—often ends with technological solutions or renewed
+              faith in authority, Japanese kaiju films resist such closure. Honda&apos;s work belongs to what film scholar Susan
+              Sontag called &apos;the imagination of disaster,&apos; but with a crucial difference: for Honda, disaster is not hypothetical
+              future but lived past. Godzilla emerges from memory before it threatens tomorrow.
             </p>
-            <p>
-              - Visit the Ghibli Museum Library notes on Eiji Tsuburaya&apos;s special effects to see how electrical spectacle
-              becomes cinematic language.
+
+            <p className="text-muted-foreground">
+              This distinction matters for contemporary climate and nuclear discourse. As we face ecological catastrophes that exceed
+              conventional narrative frameworks, Godzilla&apos;s formal strategies—the lingering witness shot, the acousmatic soundscape,
+              the sublime that terrifies—offer models for representing the unrepresentable. The film demonstrates how popular culture
+              can hold space for grief, ambiguity, and ongoing uncertainty without collapsing into despair or false hope.
+            </p>
+
+            <h3 className="text-2xl md:text-3xl font-bold mt-12 mb-6">Further Research Directions</h3>
+
+            <div className="space-y-4 text-sm md:text-base text-muted-foreground">
+              <div>
+                <p className="font-semibold text-foreground mb-2">Comparative Disaster Cinema</p>
+                <p>
+                  Examine how different national cinemas process catastrophe: Japanese kaiju films alongside American nuclear
+                  thrillers, Italian neorealist war films, and contemporary Korean climate fiction. How do cultural memories
+                  of trauma shape narrative conventions? Key texts include Susan Sontag&apos;s &quot;The Imagination of Disaster&quot;
+                  (1965) and Jerome Shapiro&apos;s <em>Atomic Bomb Cinema</em> (2002).
+                </p>
+              </div>
+
+              <div>
+                <p className="font-semibold text-foreground mb-2">Infrastructure as Cultural Memory</p>
+                <p>
+                  Investigate how films use electrical grids, railways, and telecommunications networks as narrative devices
+                  encoding national identity and vulnerability. Explore connections to Japan&apos;s &apos;infrastructure turn&apos; in urban
+                  studies, particularly work by anthropologist Hirokazu Miyazaki on post-Fukushima energy politics and
+                  architectural historian Jordan Sand on Tokyo&apos;s material history.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-semibold text-foreground mb-2">Sound Studies and Trauma</p>
+                <p>
+                  Analyze how Akira Ifukube&apos;s sound design creates acoustic memory—sirens, mechanical failures, the monster&apos;s
+                  roar as composite threat. Compare to documentary sound from Hiroshima/Nagasaki archives. Michel Chion&apos;s
+                  <em>Audio-Vision</em> and Steve Goodman&apos;s <em>Sonic Warfare</em> provide theoretical frameworks for understanding
+                  sound as historical witness.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-semibold text-foreground mb-2">Postmemory and Popular Culture</p>
+                <p>
+                  Trace how Godzilla&apos;s atomic allegory propagates across generations and geographies, becoming cultural DNA for
+                  processing nuclear anxiety globally. Marianne Hirsch&apos;s concept of &apos;postmemory&apos; applies: how do descendants
+                  inherit trauma through mediated images? Follow the franchise through Shin Godzilla (2016)&apos;s Fukushima commentary
+                  and Godzilla Minus One (2023)&apos;s return to postwar origins.
+                </p>
+              </div>
+
+              <div>
+                <p className="font-semibold text-foreground mb-2">Essential Scholarship</p>
+                <p>
+                  <strong>Foundational:</strong> Chon Noriega, &quot;Godzilla and the Japanese Nightmare&quot; (1987); William Tsutsui,
+                  <em>Godzilla on My Mind</em> (2004); Yomota Inuhiko, &quot;The Menace from the South Seas&quot; (2000).
+                </p>
+                <p>
+                  <strong>Historical Context:</strong> John Dower, <em>Embracing Defeat: Japan in the Wake of World War II</em> (1999);
+                  Lisa Yoneyama, <em>Hiroshima Traces</em> (1999); James Orr, <em>The Victim as Hero</em> (2001).
+                </p>
+                <p>
+                  <strong>Film Theory:</strong> Noël Burch, <em>To the Distant Observer</em> (1979); David Bordwell,
+                  <em>Ozu and the Poetics of Cinema</em> (1988); Tom Gunning, &quot;The Cinema of Attractions&quot; (1986).
+                </p>
+                <p>
+                  <strong>Contemporary Extensions:</strong> Peter J. Kuznick, &quot;Japan&apos;s Nuclear History in Perspective&quot; (2011);
+                  Kyle Cleveland et al., <em>Legacies of Fukushima</em> (2021); Rebecca Suter, <em>The Ends of Stories</em> (2021).
+                </p>
+              </div>
+            </div>
+
+            <p className="text-muted-foreground mt-12 italic">
+              Ultimately, Godzilla asks us to live with uncertainty as ethical practice. The film offers no solutions because
+              the problems it addresses—nuclear proliferation, technological overreach, environmental catastrophe—resist solution.
+              What it offers instead is witness: a way of seeing disaster that honors grief, refuses amnesia, and insists that
+              remembering itself is work we owe the future. In an age of cascading crises, that may be cinema&apos;s most vital gift.
             </p>
           </div>
         </div>
