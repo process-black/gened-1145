@@ -1,19 +1,14 @@
 import { ScrollVideo } from "@/components/ScrollVideo";
 
-const clips = [
-  {
-    src: "/videos/godzilla-random/clip_00.mp4",
-    title: "Clip 00",
-    placeholder:
-      "Placeholder narration for Clip 00. Outline the scene, the characters, or the emotional beat you want to emphasize as the viewer scrubs through this footage.",
-  },
-  {
-    src: "/videos/godzilla-random/clip_01.mp4",
-    title: "Clip 01",
-    placeholder:
-      "Placeholder narration for Clip 01. Highlight the moment you want the viewer to inspect closely as the second sequence unfolds.",
-  },
-];
+const clips = Array.from({ length: 13 }, (_, index) => {
+  const clipId = String(index).padStart(3, "0");
+
+  return {
+    src: `/videos/godzilla-random-2/clip_${clipId}.mp4`,
+    title: `Clip ${clipId}`,
+    placeholder: `Placeholder narration for Clip ${clipId}. Add your commentary, context, or creative notes as the footage scrolls by.`,
+  };
+});
 
 const VideoEssayPage = () => {
   return (
