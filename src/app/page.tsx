@@ -94,7 +94,7 @@ export default function Home() {
       <footer className="border-t border-neutral-200 bg-neutral-100 px-8 py-8 dark:border-neutral-800 dark:bg-neutral-950">
         <div className="mx-auto max-w-4xl text-center">
           <a
-            href="/video-essay/01"
+            href="/video-essay/02"
             className="inline-flex items-center gap-2 rounded-lg bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
           >
             View Video Essay
