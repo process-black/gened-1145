@@ -70,11 +70,11 @@ const VideoEssayPage = () => {
             Godzilla and the Electric City
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground">
-            A scrollable close reading of the 1954 film's power-station assault, tracking how electricity, military force,
+            A scrollable close reading of the 1954 film&apos;s power-station assault, tracking how electricity, military force,
             and nuclear memory entwine on screen.
           </p>
           <p className="text-base md:text-lg text-muted-foreground">
-            Move through each clip to see how Toho's monster cinema translated postwar technological hopes and anxieties into
+            Move through each clip to see how Toho&apos;s monster cinema translated postwar technological hopes and anxieties into
             incandescent spectacle.
           </p>
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground animate-bounce mt-12">
@@ -142,19 +142,19 @@ const VideoEssayPage = () => {
           </p>
           <div className="grid gap-4 text-sm text-muted-foreground">
             <p>
-              - Susan Napier, <em>Anime from Akira to Howl's Moving Castle</em> -- frames Godzilla within Japan's evolving
+              - Susan Napier, <em>Anime from Akira to Howl&apos;s Moving Castle</em> -- frames Godzilla within Japan&apos;s evolving
               technology narratives.
             </p>
             <p>
-              - Ian Condry, <em>The Soul of Anime</em> -- explores collaborative production cultures that informed Toho's
+              - Ian Condry, <em>The Soul of Anime</em> -- explores collaborative production cultures that informed Toho&apos;s
               visual effects teams.
             </p>
             <p>
               - Kyoko Hirano, <em>Mr. Smith Goes to Tokyo</em> -- documents US occupation censorship and the postwar media
-              environment that shaped Honda's choices.
+              environment that shaped Honda&apos;s choices.
             </p>
             <p>
-              - Visit the Ghibli Museum Library notes on Eiji Tsuburaya's special effects to see how electrical spectacle
+              - Visit the Ghibli Museum Library notes on Eiji Tsuburaya&apos;s special effects to see how electrical spectacle
               becomes cinematic language.
             </p>
           </div>
